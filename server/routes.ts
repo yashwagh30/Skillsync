@@ -1,4 +1,4 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, loginSchema, onboardingSchema, type User } from "@shared/schema";
@@ -7,12 +7,12 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 
-interface AuthRequest extends Express.Request {
+interface AuthRequest extends Request {
   user?: User;
 }
 
 // Middleware to verify JWT token
-const authenticateToken = async (req: AuthRequest, res: Express.Response, next: Express.NextFunction) => {
+const authenticateToken = async (req: AuthRequest, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 
