@@ -1,6 +1,11 @@
+import { useState, useEffect, useRef } from "react";
 import { GraduationCap, Briefcase, TrendingUp, FileText } from "lucide-react";
 
 export function FeaturesSection() {
+  const [counters, setCounters] = useState([0, 0, 0, 0]);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
+
   const features = [
     {
       icon: GraduationCap,
@@ -25,11 +30,73 @@ export function FeaturesSection() {
   ];
 
   const stats = [
-    { number: "50+", label: "Industries Covered" },
-    { number: "1000+", label: "Interview Questions" },
-    { number: "95%", label: "Success Rate" },
-    { number: "24/7", label: "AI Support" }
+    { number: "50+", label: "Industries Covered", targetValue: 50, suffix: "+" },
+    { number: "1000+", label: "Interview Questions", targetValue: 1000, suffix: "+" },
+    { number: "95%", label: "Success Rate", targetValue: 95, suffix: "%" },
+    { number: "24/7", label: "AI Support", targetValue: 24, suffix: "/7" }
   ];
+
+  const animateCounter = (index: number, targetValue: number, duration: number = 2000) => {
+    const startTime = Date.now();
+    const startValue = 0;
+
+    const updateCounter = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentValue = Math.round(startValue + (targetValue - startValue) * easeOutQuart);
+
+      setCounters(prev => {
+        const newCounters = [...prev];
+        newCounters[index] = currentValue;
+        return newCounters;
+      });
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      }
+    };
+
+    requestAnimationFrame(updateCounter);
+  };
+
+  useEffect(() => {
+    if (!statsRef.current || hasAnimated) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            setHasAnimated(true);
+            // Stagger the animations slightly for better visual effect
+            stats.forEach((stat, index) => {
+              setTimeout(() => {
+                animateCounter(index, stat.targetValue, 2000 + index * 200);
+              }, index * 100);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+        rootMargin: '0px'
+      }
+    );
+
+    observer.observe(statsRef.current);
+
+    return () => observer.disconnect();
+  }, [hasAnimated]);
+
+  const formatStatValue = (value: number, suffix: string) => {
+    if (suffix === "/7") {
+      return `${value}/7`;
+    }
+    return `${value}${suffix}`;
+  };
 
   return (
     <section id="features" className="py-16 bg-background">
@@ -61,10 +128,12 @@ export function FeaturesSection() {
           ))}
         </div>
         
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div ref={statsRef} className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {stats.map((stat, index) => (
             <div key={index} className="scale-in">
-              <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
+              <div className="text-3xl font-bold text-primary mb-2">
+                {formatStatValue(counters[index], stat.suffix)}
+              </div>
               <div className="text-sm text-muted-foreground">{stat.label}</div>
             </div>
           ))}
