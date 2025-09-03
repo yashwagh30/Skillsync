@@ -52,7 +52,7 @@ export default function Signup() {
       login(response.user, response.token);
       toast({
         title: "Account created!",
-        description: "Welcome to SensAI. Let's get you set up.",
+        description: "Welcome to SkillSync. Let's get you set up.",
       });
       setLocation("/onboarding");
     } catch (err: any) {
