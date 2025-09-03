@@ -10,14 +10,14 @@ export function HeroSection() {
       <div className="hero-gradient absolute inset-0"></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 fade-in-up">
             <span className="text-gradient">Your AI Career Coach for</span><br />
             <span className="text-foreground">Professional Success</span>
           </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto fade-in-up">
             Advance your career with personalized guidance, interview prep, and AI-powered tools for job success.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center fade-in-up">
             {user ? (
               user.industry && user.experienceLevel ? (
                 <Link href="/interview-questions">
@@ -49,7 +49,7 @@ export function HeroSection() {
           </div>
         </div>
         
-        <div className="mt-16 relative">
+        <div className="mt-16 relative scale-in">
           <img 
             src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=500" 
             alt="Professional woman using AI career tools" 

@@ -39,7 +39,7 @@ export function FAQSection() {
   return (
     <section id="faq" className="py-16 bg-secondary/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 fade-in-up">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
             Frequently Asked Questions
           </h2>
@@ -50,7 +50,7 @@ export function FAQSection() {
         
         <div className="max-w-3xl mx-auto space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="card-gradient rounded-xl overflow-hidden">
+            <div key={index} className="card-gradient rounded-xl overflow-hidden fade-in-up">
               <Button
                 variant="ghost"
                 className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-muted/50 transition-colors h-auto"
