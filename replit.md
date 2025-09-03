@@ -1,6 +1,6 @@
 # Overview
 
-SensAI is an AI-powered career development platform that provides personalized guidance, interview preparation, and career coaching. The application helps users advance their careers through tailored interview questions, resume building tools, industry insights, and analytics tracking. It features a modern React frontend with a Node.js/Express backend, using PostgreSQL for data persistence and JWT-based authentication.
+SkillSync is an AI-powered career development platform that provides personalized guidance, interview preparation, and career coaching. The application helps users advance their careers through tailored interview questions, resume building tools, industry insights, and analytics tracking. It features a modern React frontend with a Node.js/Express backend, using PostgreSQL for data persistence and JWT-based authentication.
 
 # User Preferences
 

@@ -26,7 +26,7 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-2" data-testid="logo-link">
             <div className="text-2xl text-primary">🤖</div>
-            <span className="text-xl font-bold">SensAI</span>
+            <span className="text-xl font-bold">SkillSync</span>
           </Link>
 
           {/* Desktop Navigation */}

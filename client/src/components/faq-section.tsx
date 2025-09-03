@@ -7,11 +7,11 @@ export function FAQSection() {
 
   const faqs = [
     {
-      question: "What makes SensAI unique as a career development tool?",
-      answer: "SensAI combines advanced AI technology with personalized career coaching to provide tailored guidance, interview preparation, and industry insights that adapt to your specific goals and experience level."
+      question: "What makes SkillSync unique as a career development tool?",
+      answer: "SkillSync combines advanced AI technology with personalized career coaching to provide tailored guidance, interview preparation, and industry insights that adapt to your specific goals and experience level."
     },
     {
-      question: "How does SensAI create tailored content?",
+      question: "How does SkillSync create tailored content?",
       answer: "Our AI analyzes your industry, experience level, career goals, and preferences to generate personalized interview questions, resume suggestions, and career advice that align with your specific objectives."
     },
     {
@@ -19,7 +19,7 @@ export function FAQSection() {
       answer: "Our industry insights are updated in real-time using data from multiple authoritative sources, including job market trends, salary data, and industry reports to ensure accuracy and relevance."
     },
     {
-      question: "Is my data secure with SensAI?",
+      question: "Is my data secure with SkillSync?",
       answer: "Yes, we implement enterprise-grade security measures including data encryption, secure authentication, and privacy controls to protect your personal and professional information."
     },
     {

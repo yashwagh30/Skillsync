@@ -40,7 +40,7 @@ export default function Home() {
             Ready to Accelerate Your Career?
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto fade-in-up">
-            Join thousands of professionals who have advanced their careers with SensAI
+            Join thousands of professionals who have advanced their careers with SkillSync
           </p>
           <div className="fade-in-up">
             <Link href="/signup">
