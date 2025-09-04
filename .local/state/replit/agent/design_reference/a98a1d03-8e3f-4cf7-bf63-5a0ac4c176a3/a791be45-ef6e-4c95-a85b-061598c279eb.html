@@ -1,0 +1,1053 @@
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SensAI - Your AI Career Coach for Professional Success</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    popover: {
+                        DEFAULT: "var(--popover)",
+                        foreground: "var(--popover-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    destructive: {
+                        DEFAULT: "var(--destructive)",
+                        foreground: "var(--destructive-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                },
+                fontFamily: {
+                    sans: ["Inter", "system-ui", "sans-serif"],
+                }
+            },
+        }
+    };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --background: hsl(240 10% 3.9%);
+            --foreground: hsl(0 0% 98%);
+            --card: hsl(240 10% 3.9%);
+            --card-foreground: hsl(0 0% 98%);
+            --popover: hsl(240 10% 3.9%);
+            --popover-foreground: hsl(0 0% 98%);
+            --primary: hsl(24 95% 53%);
+            --primary-foreground: hsl(0 0% 98%);
+            --secondary: hsl(240 3.7% 15.9%);
+            --secondary-foreground: hsl(0 0% 98%);
+            --muted: hsl(240 3.7% 15.9%);
+            --muted-foreground: hsl(240 5% 64.9%);
+            --accent: hsl(24 95% 53%);
+            --accent-foreground: hsl(0 0% 98%);
+            --destructive: hsl(0 62.8% 30.6%);
+            --destructive-foreground: hsl(0 0% 98%);
+            --border: hsl(240 3.7% 15.9%);
+            --input: hsl(240 3.7% 15.9%);
+            --ring: hsl(24 95% 53%);
+            --radius: 0.5rem;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, hsl(240 10% 3.9%) 0%, hsl(242 18% 8%) 50%, hsl(240 10% 3.9%) 100%);
+        }
+        
+        .card-gradient {
+            background: linear-gradient(145deg, hsl(240 3.7% 15.9% / 0.3) 0%, hsl(240 3.7% 15.9% / 0.1) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid hsl(240 3.7% 15.9% / 0.3);
+        }
+        
+        .hero-gradient {
+            background: radial-gradient(ellipse at center, hsl(24 95% 53% / 0.1) 0%, transparent 50%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, hsl(0 0% 98%) 0%, hsl(240 5% 64.9%) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, hsl(24 95% 53%) 0%, hsl(33 100% 50%) 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px hsl(24 95% 53% / 0.3);
+        }
+        
+        .hidden { display: none; }
+        .block { display: block; }
+    </style>
+</head>
+<body class="font-sans bg-background text-foreground gradient-bg min-h-screen">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-robot text-2xl text-primary"></i>
+                    <span class="text-xl font-bold">SensAI</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-muted-foreground hover:text-foreground transition-colors">Home</a>
+                    <a href="#features" class="nav-link text-muted-foreground hover:text-foreground transition-colors">Features</a>
+                    <a href="#pricing" class="nav-link text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
+                    <a href="#faq" class="nav-link text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="hidden md:block text-sm text-muted-foreground hover:text-foreground transition-colors" onclick="showLogin()">
+                        Industry Insights
+                    </button>
+                    <div class="relative">
+                        <button class="flex items-center space-x-1 text-sm bg-secondary px-3 py-2 rounded-md hover:bg-secondary/80 transition-colors" onclick="toggleGrowthTools()">
+                            <span>Growth Tools</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="growth-tools-menu" class="hidden absolute right-0 mt-2 w-48 bg-card border border-border rounded-md shadow-lg py-1">
+                            <a href="#" class="block px-4 py-2 text-sm text-card-foreground hover:bg-muted transition-colors" onclick="showInterviewQuestions()">Interview Questions</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-card-foreground hover:bg-muted transition-colors" onclick="showResumeBuilder()">Resume Builder</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-card-foreground hover:bg-muted transition-colors" onclick="showAnalytics()">Analytics</a>
+                        </div>
+                    </div>
+                    <button class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-semibold text-sm" onclick="showLogin()">
+                        Y
+                    </button>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-foreground" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden fixed top-16 left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border z-40 md:hidden">
+        <div class="px-4 py-6 space-y-4">
+            <a href="#home" class="block text-muted-foreground hover:text-foreground transition-colors">Home</a>
+            <a href="#features" class="block text-muted-foreground hover:text-foreground transition-colors">Features</a>
+            <a href="#pricing" class="block text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
+            <a href="#faq" class="block text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
+            <hr class="border-border">
+            <button class="block w-full text-left text-muted-foreground hover:text-foreground transition-colors" onclick="showLogin()">Login</button>
+            <button class="block w-full text-left text-muted-foreground hover:text-foreground transition-colors" onclick="showSignup()">Sign Up</button>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div id="main-content">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="relative pt-24 pb-16 overflow-hidden">
+            <div class="hero-gradient absolute inset-0"></div>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        <span class="text-gradient">Your AI Career Coach for</span><br>
+                        <span class="text-foreground">Professional Success</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto">
+                        Advance your career with personalized guidance, interview prep, and AI-powered tools for job success.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <button class="btn-primary px-8 py-3 rounded-lg font-semibold text-primary-foreground" onclick="showOnboarding()">
+                            Get Started
+                        </button>
+                        <button class="px-8 py-3 rounded-lg font-semibold border border-border text-foreground hover:bg-muted transition-colors" onclick="showDemo()">
+                            Watch Demo
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Hero Image Placeholder -->
+                <div class="mt-16 relative">
+                    <!-- Professional woman with AI visualization background -->
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=500" alt="Professional woman using AI career tools" class="rounded-2xl shadow-2xl mx-auto w-full max-w-4xl" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent rounded-2xl"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-16 bg-background">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                        Powerful Features For Your Career Growth
+                    </h2>
+                    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                        Comprehensive tools designed to accelerate your professional journey
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Feature Card 1 -->
+                    <div class="card-gradient rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-user-graduate text-primary text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-foreground mb-2">AI-Powered Career Guidance</h3>
+                            <p class="text-sm text-muted-foreground leading-relaxed">
+                                Get personalized career advice and insights powered by advanced AI technology.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature Card 2 -->
+                    <div class="card-gradient rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-briefcase text-primary text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-foreground mb-2">Interview Preparation</h3>
+                            <p class="text-sm text-muted-foreground leading-relaxed">
+                                Practice with role-specific questions and get instant feedback to improve your performance.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature Card 3 -->
+                    <div class="card-gradient rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-chart-line text-primary text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-foreground mb-2">Industry Insights</h3>
+                            <p class="text-sm text-muted-foreground leading-relaxed">
+                                Stay ahead with real-time industry trends, salary data, and market analysis.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature Card 4 -->
+                    <div class="card-gradient rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-file-alt text-primary text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-foreground mb-2">Smart Resume Creation</h3>
+                            <p class="text-sm text-muted-foreground leading-relaxed">
+                                Generate ATS-optimized resumes with AI assistance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-3xl font-bold text-primary mb-2">50+</div>
+                        <div class="text-sm text-muted-foreground">Industries Covered</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-primary mb-2">1000+</div>
+                        <div class="text-sm text-muted-foreground">Interview Questions</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-primary mb-2">95%</div>
+                        <div class="text-sm text-muted-foreground">Success Rate</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-primary mb-2">24/7</div>
+                        <div class="text-sm text-muted-foreground">AI Support</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-16 bg-secondary/30">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                        Frequently Asked Questions
+                    </h2>
+                    <p class="text-lg text-muted-foreground">
+                        Find answers to common questions about our platform
+                    </p>
+                </div>
+                
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="faq-item card-gradient rounded-xl overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-muted/50 transition-colors" onclick="toggleFAQ(0)">
+                            <span class="font-medium text-foreground">What makes SensAI unique as a career development tool?</span>
+                            <i class="fas fa-chevron-down text-muted-foreground faq-arrow transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-4">
+                            <p class="text-muted-foreground leading-relaxed">
+                                SensAI combines advanced AI technology with personalized career coaching to provide tailored guidance, interview preparation, and industry insights that adapt to your specific goals and experience level.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item card-gradient rounded-xl overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-muted/50 transition-colors" onclick="toggleFAQ(1)">
+                            <span class="font-medium text-foreground">How does SensAI create tailored content?</span>
+                            <i class="fas fa-chevron-down text-muted-foreground faq-arrow transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-4">
+                            <p class="text-muted-foreground leading-relaxed">
+                                Our AI analyzes your industry, experience level, career goals, and preferences to generate personalized interview questions, resume suggestions, and career advice that align with your specific objectives.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item card-gradient rounded-xl overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-muted/50 transition-colors" onclick="toggleFAQ(2)">
+                            <span class="font-medium text-foreground">How accurate and up-to-date are the industry insights?</span>
+                            <i class="fas fa-chevron-down text-muted-foreground faq-arrow transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-4">
+                            <p class="text-muted-foreground leading-relaxed">
+                                Our industry insights are updated in real-time using data from multiple authoritative sources, including job market trends, salary data, and industry reports to ensure accuracy and relevance.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item card-gradient rounded-xl overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-muted/50 transition-colors" onclick="toggleFAQ(3)">
+                            <span class="font-medium text-foreground">Is my data secure with SensAI?</span>
+                            <i class="fas fa-chevron-down text-muted-foreground faq-arrow transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-4">
+                            <p class="text-muted-foreground leading-relaxed">
+                                Yes, we implement enterprise-grade security measures including data encryption, secure authentication, and privacy controls to protect your personal and professional information.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item card-gradient rounded-xl overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-muted/50 transition-colors" onclick="toggleFAQ(4)">
+                            <span class="font-medium text-foreground">How can I track my interview preparation progress?</span>
+                            <i class="fas fa-chevron-down text-muted-foreground faq-arrow transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-4">
+                            <p class="text-muted-foreground leading-relaxed">
+                                Our analytics dashboard provides comprehensive progress tracking including practice session history, performance metrics, improvement areas, and personalized recommendations for continued growth.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item card-gradient rounded-xl overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-muted/50 transition-colors" onclick="toggleFAQ(5)">
+                            <span class="font-medium text-foreground">Can I edit the AI-generated content?</span>
+                            <i class="fas fa-chevron-down text-muted-foreground faq-arrow transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-4">
+                            <p class="text-muted-foreground leading-relaxed">
+                                Absolutely! All AI-generated content including resumes, cover letters, and practice responses can be fully customized and edited to match your personal style and preferences.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 bg-background">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                    Ready to Accelerate Your Career?
+                </h2>
+                <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                    Join thousands of professionals who have advanced their careers with SensAI
+                </p>
+                <button class="btn-primary px-8 py-3 rounded-lg font-semibold text-primary-foreground" onclick="showOnboarding()">
+                    Start Your Journey Today
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <div class="card-gradient rounded-2xl p-8 w-full max-w-md">
+            <!-- Login Form -->
+            <div id="login-form">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-foreground mb-2">Welcome Back</h2>
+                    <p class="text-muted-foreground">Sign in to continue your career journey</p>
+                </div>
+                <form onsubmit="handleLogin(event)">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-1">Email</label>
+                            <input type="email" required class="w-full px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" placeholder="Enter your email">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-1">Password</label>
+                            <input type="password" required class="w-full px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" placeholder="Enter your password">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-border text-primary focus:ring-ring">
+                                <span class="ml-2 text-sm text-muted-foreground">Remember me</span>
+                            </label>
+                            <a href="#" class="text-sm text-primary hover:underline">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="w-full btn-primary py-2 rounded-lg font-semibold text-primary-foreground">
+                            Sign In
+                        </button>
+                    </div>
+                </form>
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-muted-foreground">
+                        Don't have an account? 
+                        <button class="text-primary hover:underline" onclick="showSignup()">Sign up</button>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="hidden">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-foreground mb-2">Create Account</h2>
+                    <p class="text-muted-foreground">Start your AI-powered career journey</p>
+                </div>
+                <form onsubmit="handleSignup(event)">
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-foreground mb-1">First Name</label>
+                                <input type="text" required class="w-full px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-foreground mb-1">Last Name</label>
+                                <input type="text" required class="w-full px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-1">Email</label>
+                            <input type="email" required class="w-full px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-1">Password</label>
+                            <input type="password" required class="w-full px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" placeholder="Create a strong password">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-1">Confirm Password</label>
+                            <input type="password" required class="w-full px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" placeholder="Confirm your password">
+                        </div>
+                        <label class="flex items-start">
+                            <input type="checkbox" required class="mt-1 rounded border-border text-primary focus:ring-ring">
+                            <span class="ml-2 text-sm text-muted-foreground">
+                                I agree to the <a href="#" class="text-primary hover:underline">Terms of Service</a> and <a href="#" class="text-primary hover:underline">Privacy Policy</a>
+                            </span>
+                        </label>
+                        <button type="submit" class="w-full btn-primary py-2 rounded-lg font-semibold text-primary-foreground">
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-muted-foreground">
+                        Already have an account? 
+                        <button class="text-primary hover:underline" onclick="showLogin()">Sign in</button>
+                    </p>
+                </div>
+            </div>
+            
+            <button class="absolute top-4 right-4 text-muted-foreground hover:text-foreground" onclick="closeAuthModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Onboarding Flow -->
+    <div id="onboarding-flow" class="hidden fixed inset-0 z-50 gradient-bg">
+        <!-- Step 1: Industry Selection -->
+        <div id="onboarding-step-1" class="container mx-auto px-4 sm:px-6 lg:px-8 pt-24">
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="mb-8">
+                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-industry text-primary text-2xl"></i>
+                    </div>
+                    <h1 class="text-3xl font-bold text-foreground mb-4">What's your industry?</h1>
+                    <p class="text-muted-foreground">Help us personalize your career guidance</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <button class="industry-option card-gradient rounded-xl p-6 text-left hover:bg-primary/10 transition-colors" onclick="selectIndustry('technology')">
+                        <i class="fas fa-laptop-code text-primary text-xl mb-3"></i>
+                        <h3 class="font-semibold text-foreground mb-2">Technology</h3>
+                        <p class="text-sm text-muted-foreground">Software development, AI, cybersecurity</p>
+                    </button>
+                    
+                    <button class="industry-option card-gradient rounded-xl p-6 text-left hover:bg-primary/10 transition-colors" onclick="selectIndustry('finance')">
+                        <i class="fas fa-chart-bar text-primary text-xl mb-3"></i>
+                        <h3 class="font-semibold text-foreground mb-2">Finance</h3>
+                        <p class="text-sm text-muted-foreground">Banking, investment, fintech</p>
+                    </button>
+                    
+                    <button class="industry-option card-gradient rounded-xl p-6 text-left hover:bg-primary/10 transition-colors" onclick="selectIndustry('healthcare')">
+                        <i class="fas fa-heartbeat text-primary text-xl mb-3"></i>
+                        <h3 class="font-semibold text-foreground mb-2">Healthcare</h3>
+                        <p class="text-sm text-muted-foreground">Medical, pharmaceutical, biotech</p>
+                    </button>
+                    
+                    <button class="industry-option card-gradient rounded-xl p-6 text-left hover:bg-primary/10 transition-colors" onclick="selectIndustry('marketing')">
+                        <i class="fas fa-bullhorn text-primary text-xl mb-3"></i>
+                        <h3 class="font-semibold text-foreground mb-2">Marketing</h3>
+                        <p class="text-sm text-muted-foreground">Digital marketing, advertising, PR</p>
+                    </button>
+                </div>
+                
+                <button class="text-muted-foreground hover:text-foreground" onclick="closeOnboarding()">
+                    Skip for now
+                </button>
+            </div>
+        </div>
+        
+        <!-- Step 2: Experience Level -->
+        <div id="onboarding-step-2" class="hidden container mx-auto px-4 sm:px-6 lg:px-8 pt-24">
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="mb-8">
+                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-primary text-2xl"></i>
+                    </div>
+                    <h1 class="text-3xl font-bold text-foreground mb-4">What's your experience level?</h1>
+                    <p class="text-muted-foreground">We'll tailor our guidance to your career stage</p>
+                </div>
+                
+                <div class="space-y-4 mb-8">
+                    <button class="experience-option w-full card-gradient rounded-xl p-6 text-left hover:bg-primary/10 transition-colors" onclick="selectExperience('entry')">
+                        <h3 class="font-semibold text-foreground mb-2">Entry Level (0-2 years)</h3>
+                        <p class="text-sm text-muted-foreground">Recent graduate or changing careers</p>
+                    </button>
+                    
+                    <button class="experience-option w-full card-gradient rounded-xl p-6 text-left hover:bg-primary/10 transition-colors" onclick="selectExperience('mid')">
+                        <h3 class="font-semibold text-foreground mb-2">Mid Level (3-7 years)</h3>
+                        <p class="text-sm text-muted-foreground">Experienced professional looking to advance</p>
+                    </button>
+                    
+                    <button class="experience-option w-full card-gradient rounded-xl p-6 text-left hover:bg-primary/10 transition-colors" onclick="selectExperience('senior')">
+                        <h3 class="font-semibold text-foreground mb-2">Senior Level (8+ years)</h3>
+                        <p class="text-sm text-muted-foreground">Leadership roles and executive positions</p>
+                    </button>
+                </div>
+                
+                <div class="flex justify-between">
+                    <button class="text-muted-foreground hover:text-foreground" onclick="showOnboardingStep(1)">
+                        Back
+                    </button>
+                    <button class="text-muted-foreground hover:text-foreground" onclick="closeOnboarding()">
+                        Skip for now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature Pages -->
+    <!-- Interview Questions Page -->
+    <div id="interview-questions-page" class="hidden fixed inset-0 z-50 gradient-bg overflow-y-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-foreground mb-2">Interview Questions</h1>
+                        <p class="text-muted-foreground">Practice with AI-powered interview questions tailored to your industry</p>
+                    </div>
+                    <button class="text-muted-foreground hover:text-foreground" onclick="closePage('interview-questions-page')">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2">
+                        <div class="card-gradient rounded-xl p-6 mb-6">
+                            <h3 class="text-lg font-semibold text-foreground mb-4">Current Question</h3>
+                            <div class="bg-muted/30 rounded-lg p-4 mb-4">
+                                <p class="text-foreground" data-mock="true">Tell me about a challenging project you worked on and how you overcame the obstacles.</p>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-foreground mb-2">Your Answer</label>
+                                <textarea class="w-full h-32 px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none" placeholder="Type your answer here..." data-implementation="Connect to speech-to-text API"></textarea>
+                            </div>
+                            <div class="flex gap-3">
+                                <button class="btn-primary px-4 py-2 rounded-lg font-medium text-primary-foreground">
+                                    <i class="fas fa-microphone mr-2"></i>Record Answer
+                                </button>
+                                <button class="bg-secondary px-4 py-2 rounded-lg font-medium text-secondary-foreground hover:bg-secondary/80 transition-colors">
+                                    Next Question
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="card-gradient rounded-xl p-6">
+                            <h3 class="text-lg font-semibold text-foreground mb-4">AI Feedback</h3>
+                            <div class="space-y-3" data-implementation="AI analysis results">
+                                <div class="flex items-start gap-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <p class="text-muted-foreground text-sm" data-mock="true">Good use of specific examples and quantifiable results</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i class="fas fa-lightbulb text-yellow-500 mt-1"></i>
+                                    <p class="text-muted-foreground text-sm" data-mock="true">Consider adding more details about your problem-solving process</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="card-gradient rounded-xl p-6">
+                            <h3 class="text-lg font-semibold text-foreground mb-4">Progress</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-muted-foreground">Questions Completed</span>
+                                    <span class="text-foreground font-medium" data-mock="true">8/20</span>
+                                </div>
+                                <div class="w-full bg-muted rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 40%"></div>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-muted-foreground">Average Score</span>
+                                    <span class="text-foreground font-medium" data-mock="true">8.2/10</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-gradient rounded-xl p-6">
+                            <h3 class="text-lg font-semibold text-foreground mb-4">Question Categories</h3>
+                            <div class="space-y-2">
+                                <button class="w-full text-left px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium">Behavioral</button>
+                                <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-muted/50 text-muted-foreground">Technical</button>
+                                <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-muted/50 text-muted-foreground">Leadership</button>
+                                <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-muted/50 text-muted-foreground">Problem Solving</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Builder Page -->
+    <div id="resume-builder-page" class="hidden fixed inset-0 z-50 gradient-bg overflow-y-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-foreground mb-2">Resume Builder</h1>
+                        <p class="text-muted-foreground">Create ATS-optimized resumes with AI assistance</p>
+                    </div>
+                    <button class="text-muted-foreground hover:text-foreground" onclick="closePage('resume-builder-page')">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Resume Editor -->
+                    <div class="space-y-6">
+                        <div class="card-gradient rounded-xl p-6">
+                            <h3 class="text-lg font-semibold text-foreground mb-4">Personal Information</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input type="text" placeholder="Full Name" class="px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" data-mock="true" value="John Doe">
+                                <input type="email" placeholder="Email" class="px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" data-mock="true" value="john@example.com">
+                                <input type="tel" placeholder="Phone" class="px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" data-mock="true" value="+1 (555) 123-4567">
+                                <input type="text" placeholder="Location" class="px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" data-mock="true" value="San Francisco, CA">
+                            </div>
+                        </div>
+                        
+                        <div class="card-gradient rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-foreground">Professional Summary</h3>
+                                <button class="text-primary hover:text-primary/80 text-sm">
+                                    <i class="fas fa-wand-magic-sparkles mr-1"></i>AI Generate
+                                </button>
+                            </div>
+                            <textarea class="w-full h-24 px-3 py-2 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none" placeholder="Enter your professional summary..." data-mock="true">Experienced software engineer with 5+ years developing scalable web applications...</textarea>
+                        </div>
+                        
+                        <div class="card-gradient rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-foreground">Work Experience</h3>
+                                <button class="text-primary hover:text-primary/80 text-sm">
+                                    <i class="fas fa-plus mr-1"></i>Add Experience
+                                </button>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="border border-border rounded-lg p-4" data-mock="true">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+                                        <input type="text" placeholder="Job Title" class="px-3 py-2 bg-input border border-border rounded-lg text-foreground" value="Senior Software Engineer">
+                                        <input type="text" placeholder="Company" class="px-3 py-2 bg-input border border-border rounded-lg text-foreground" value="Tech Corp">
+                                        <input type="text" placeholder="Start Date" class="px-3 py-2 bg-input border border-border rounded-lg text-foreground" value="Jan 2020">
+                                        <input type="text" placeholder="End Date" class="px-3 py-2 bg-input border border-border rounded-lg text-foreground" value="Present">
+                                    </div>
+                                    <textarea class="w-full h-20 px-3 py-2 bg-input border border-border rounded-lg text-foreground resize-none" placeholder="Job description...">• Led development of microservices architecture...</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Resume Preview -->
+                    <div class="card-gradient rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-foreground">Preview</h3>
+                            <button class="btn-primary px-4 py-2 rounded-lg font-medium text-primary-foreground">
+                                <i class="fas fa-download mr-2"></i>Download PDF
+                            </button>
+                        </div>
+                        
+                        <!-- Resume Preview Content -->
+                        <div class="bg-white text-black p-6 rounded-lg min-h-[600px]" data-implementation="PDF preview renderer">
+                            <div class="text-center mb-4" data-mock="true">
+                                <h1 class="text-2xl font-bold">John Doe</h1>
+                                <p class="text-gray-600">Senior Software Engineer</p>
+                                <p class="text-sm text-gray-500">john@example.com • +1 (555) 123-4567 • San Francisco, CA</p>
+                            </div>
+                            
+                            <div class="mb-4" data-mock="true">
+                                <h2 class="text-lg font-semibold border-b border-gray-300 mb-2">Professional Summary</h2>
+                                <p class="text-sm text-gray-700">Experienced software engineer with 5+ years developing scalable web applications...</p>
+                            </div>
+                            
+                            <div class="mb-4" data-mock="true">
+                                <h2 class="text-lg font-semibold border-b border-gray-300 mb-2">Work Experience</h2>
+                                <div class="mb-3">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="font-semibold">Senior Software Engineer</h3>
+                                            <p class="text-sm text-gray-600">Tech Corp</p>
+                                        </div>
+                                        <span class="text-sm text-gray-500">Jan 2020 - Present</span>
+                                    </div>
+                                    <ul class="text-sm text-gray-700 mt-2 list-disc list-inside">
+                                        <li>Led development of microservices architecture</li>
+                                        <li>Improved system performance by 40%</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics Page -->
+    <div id="analytics-page" class="hidden fixed inset-0 z-50 gradient-bg overflow-y-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-foreground mb-2">Analytics Dashboard</h1>
+                        <p class="text-muted-foreground">Track your career development progress and insights</p>
+                    </div>
+                    <button class="text-muted-foreground hover:text-foreground" onclick="closePage('analytics-page')">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="card-gradient rounded-xl p-6 text-center">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-chart-line text-primary text-xl"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-foreground mb-1" data-mock="true">85%</div>
+                        <div class="text-sm text-muted-foreground">Interview Success Rate</div>
+                    </div>
+                    
+                    <div class="card-gradient rounded-xl p-6 text-center">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-clock text-primary text-xl"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-foreground mb-1" data-mock="true">24</div>
+                        <div class="text-sm text-muted-foreground">Hours Practiced</div>
+                    </div>
+                    
+                    <div class="card-gradient rounded-xl p-6 text-center">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-target text-primary text-xl"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-foreground mb-1" data-mock="true">127</div>
+                        <div class="text-sm text-muted-foreground">Questions Answered</div>
+                    </div>
+                    
+                    <div class="card-gradient rounded-xl p-6 text-center">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-trophy text-primary text-xl"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-foreground mb-1" data-mock="true">8.4</div>
+                        <div class="text-sm text-muted-foreground">Average Score</div>
+                    </div>
+                </div>
+                
+                <!-- Charts Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="card-gradient rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-foreground mb-4">Progress Over Time</h3>
+                        <div class="h-64 bg-muted/20 rounded-lg flex items-center justify-center" data-implementation="Chart.js line chart">
+                            <p class="text-muted-foreground">Progress Chart Placeholder</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card-gradient rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-foreground mb-4">Skills Assessment</h3>
+                        <div class="space-y-4" data-mock="true">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-foreground">Technical Skills</span>
+                                    <span class="text-muted-foreground">85%</span>
+                                </div>
+                                <div class="w-full bg-muted rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-foreground">Communication</span>
+                                    <span class="text-muted-foreground">78%</span>
+                                </div>
+                                <div class="w-full bg-muted rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 78%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-foreground">Leadership</span>
+                                    <span class="text-muted-foreground">72%</span>
+                                </div>
+                                <div class="w-full bg-muted rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 72%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-foreground">Problem Solving</span>
+                                    <span class="text-muted-foreground">91%</span>
+                                </div>
+                                <div class="w-full bg-muted rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 91%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity -->
+                <div class="card-gradient rounded-xl p-6">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Recent Activity</h3>
+                    <div class="space-y-4" data-mock="true">
+                        <div class="flex items-center gap-4 p-3 bg-muted/20 rounded-lg">
+                            <div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-microphone text-primary text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-foreground font-medium">Completed Interview Practice</p>
+                                <p class="text-sm text-muted-foreground">Behavioral questions - Score: 8.5/10</p>
+                            </div>
+                            <span class="text-sm text-muted-foreground">2 hours ago</span>
+                        </div>
+                        
+                        <div class="flex items-center gap-4 p-3 bg-muted/20 rounded-lg">
+                            <div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-file-alt text-primary text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-foreground font-medium">Updated Resume</p>
+                                <p class="text-sm text-muted-foreground">Added new work experience</p>
+                            </div>
+                            <span class="text-sm text-muted-foreground">1 day ago</span>
+                        </div>
+                        
+                        <div class="flex items-center gap-4 p-3 bg-muted/20 rounded-lg">
+                            <div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-chart-bar text-primary text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-foreground font-medium">Viewed Industry Insights</p>
+                                <p class="text-sm text-muted-foreground">Technology sector analysis</p>
+                            </div>
+                            <span class="text-sm text-muted-foreground">3 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation and UI functionality
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function toggleGrowthTools() {
+            const menu = document.getElementById('growth-tools-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Authentication Modal
+        function showLogin() {
+            document.getElementById('auth-modal').classList.remove('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('signup-form').classList.add('hidden');
+        }
+
+        function showSignup() {
+            document.getElementById('auth-modal').classList.remove('hidden');
+            document.getElementById('signup-form').classList.remove('hidden');
+            document.getElementById('login-form').classList.add('hidden');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            // TODO: Implement login logic with backend API
+            alert('Login functionality would connect to backend API');
+            closeAuthModal();
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            // TODO: Implement signup logic with backend API
+            alert('Signup functionality would connect to backend API');
+            closeAuthModal();
+        }
+
+        // Onboarding Flow
+        function showOnboarding() {
+            document.getElementById('onboarding-flow').classList.remove('hidden');
+            document.getElementById('main-content').classList.add('hidden');
+            showOnboardingStep(1);
+        }
+
+        function showOnboardingStep(step) {
+            document.getElementById('onboarding-step-1').classList.add('hidden');
+            document.getElementById('onboarding-step-2').classList.add('hidden');
+            document.getElementById('onboarding-step-' + step).classList.remove('hidden');
+        }
+
+        function selectIndustry(industry) {
+            // TODO: Save selected industry to user profile
+            console.log('Selected industry:', industry);
+            showOnboardingStep(2);
+        }
+
+        function selectExperience(level) {
+            // TODO: Save selected experience level to user profile
+            console.log('Selected experience level:', level);
+            closeOnboarding();
+            alert('Onboarding complete! Your personalized dashboard is ready.');
+        }
+
+        function closeOnboarding() {
+            document.getElementById('onboarding-flow').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+        }
+
+        // Feature Pages
+        function showInterviewQuestions() {
+            document.getElementById('interview-questions-page').classList.remove('hidden');
+            document.getElementById('main-content').classList.add('hidden');
+            closeDropdowns();
+        }
+
+        function showResumeBuilder() {
+            document.getElementById('resume-builder-page').classList.remove('hidden');
+            document.getElementById('main-content').classList.add('hidden');
+            closeDropdowns();
+        }
+
+        function showAnalytics() {
+            document.getElementById('analytics-page').classList.remove('hidden');
+            document.getElementById('main-content').classList.add('hidden');
+            closeDropdowns();
+        }
+
+        function closePage(pageId) {
+            document.getElementById(pageId).classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+        }
+
+        function closeDropdowns() {
+            document.getElementById('growth-tools-menu').classList.add('hidden');
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        function showDemo() {
+            alert('Demo video would be displayed here');
+        }
+
+        // FAQ Functionality
+        function toggleFAQ(index) {
+            const faqItems = document.querySelectorAll('.faq-item');
+            const faqItem = faqItems[index];
+            const content = faqItem.querySelector('.faq-content');
+            const arrow = faqItem.querySelector('.faq-arrow');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            const growthToolsButton = event.target.closest('[onclick="toggleGrowthTools()"]');
+            const growthToolsMenu = document.getElementById('growth-tools-menu');
+            
+            if (!growthToolsButton && !growthToolsMenu.contains(event.target)) {
+                growthToolsMenu.classList.add('hidden');
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('auth-modal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeAuthModal();
+            }
+        });
+    </script>
+</body>
+</html>
