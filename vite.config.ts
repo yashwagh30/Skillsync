@@ -39,9 +39,13 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:5008', // Your backend Express API server
+        target: 'http://localhost:5008',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '') // remove /api prefix if needed
+        secure: false,
+        // Add timeout and retry options
+        agent: undefined,
+        // Remove the rewrite if your backend expects /api prefix
+        // rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
   },

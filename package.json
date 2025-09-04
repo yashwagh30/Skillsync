@@ -11,7 +11,7 @@
     "start": "NODE_ENV=production node dist/index.js",
     "build:frontend": "vite build --config vite.config.ts",
     "check": "tsc",
-    "db:push": "drizzle-kit push"
+    "db:push": "dotenv -- drizzle-kit push"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
