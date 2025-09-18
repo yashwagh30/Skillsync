@@ -13,6 +13,7 @@ import InterviewQuestions from "@/pages/interview-questions";
 import ResumeBuilder from "@/pages/resume-builder";
 import Analytics from "@/pages/analytics";
 import IndustryInsights from "@/pages/industry-insights";
+import AuthCallback from "@/pages/auth-callback";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -26,6 +27,7 @@ function Router() {
       <Route path="/resume-builder" component={ResumeBuilder} />
       <Route path="/analytics" component={Analytics} />
       <Route path="/industry-insights" component={IndustryInsights} />
+      <Route path="/auth/callback" component={AuthCallback} />
       <Route component={NotFound} />
     </Switch>
   );

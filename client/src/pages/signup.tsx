@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useAuth } from "@/components/auth-context";
 import { signupUser } from "@/lib/auth";
+import { OAuthButton } from "@/components/oauth-button";
 import { useToast } from "@/hooks/use-toast";
 
 interface SignupForm extends InsertUser {
@@ -29,6 +30,17 @@ export default function Signup() {
   const { login } = useAuth();
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+
+  // Check for OAuth error in URL params
+  useState(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const oauthError = urlParams.get('error');
+    if (oauthError === 'oauth_failed') {
+      setError("Google sign-up failed. Please try again or use email/password.");
+      // Clean up URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  });
 
   const {
     register,
@@ -76,6 +88,19 @@ export default function Signup() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-border" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+              </div>
+            </div>
+
+            <OAuthButton provider="google" className="border-border text-foreground hover:bg-muted">
+              Sign up with Google
+            </OAuthButton>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">

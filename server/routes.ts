@@ -4,11 +4,45 @@ import { storage } from "./storage";
 import { insertUserSchema, loginSchema, onboardingSchema, type User } from "@shared/schema";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import passport from "passport";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 interface AuthRequest extends Request {
   user?: User;
+}
+
+// Configure Google OAuth strategy
+if (GOOGLE_CLIENT_ID && GOOGLE_CLIENT_SECRET) {
+  passport.use(new GoogleStrategy({
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: "/api/auth/google/callback"
+  }, async (accessToken, refreshToken, profile, done) => {
+    try {
+      // Check if user already exists
+      let user = await storage.getUserByEmail(profile.emails?.[0]?.value || '');
+      
+      if (!user) {
+        // Create new user from Google profile
+        const userData = {
+          email: profile.emails?.[0]?.value || '',
+          firstName: profile.name?.givenName || '',
+          lastName: profile.name?.familyName || '',
+          password: '', // No password for OAuth users
+        };
+        
+        user = await storage.createUser(userData);
+      }
+      
+      return done(null, user);
+    } catch (error) {
+      return done(error, undefined);
+    }
+  }));
 }
 
 // Middleware to verify JWT token
@@ -36,6 +70,9 @@ const authenticateToken = async (req: AuthRequest, res: Response, next: NextFunc
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Initialize passport
+  app.use(passport.initialize());
+
   // Auth routes
   app.post("/api/auth/signup", async (req, res) => {
     try {
@@ -108,6 +145,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/auth/logout", (req, res) => {
     res.json({ message: "Logged out successfully" });
   });
+
+  // Google OAuth routes
+  app.get("/api/auth/google", 
+    passport.authenticate("google", { scope: ["profile", "email"] })
+  );
+
+  app.get("/api/auth/google/callback",
+    passport.authenticate("google", { session: false }),
+    async (req: AuthRequest, res) => {
+      try {
+        if (!req.user) {
+          return res.redirect(`${process.env.CLIENT_URL || 'http://localhost:3001'}/login?error=oauth_failed`);
+        }
+
+        // Generate JWT token
+        const token = jwt.sign({ userId: req.user.id }, JWT_SECRET, { expiresIn: "7d" });
+        
+        // Redirect to frontend with token
+        res.redirect(`${process.env.CLIENT_URL || 'http://localhost:3001'}/auth/callback?token=${token}`);
+      } catch (error) {
+        res.redirect(`${process.env.CLIENT_URL || 'http://localhost:3001'}/login?error=oauth_failed`);
+      }
+    }
+  );
 
   // Onboarding route
   app.post("/api/onboarding", authenticateToken, async (req: AuthRequest, res) => {
