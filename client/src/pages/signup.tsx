@@ -62,6 +62,11 @@ export default function Signup() {
     }
   };
 
+  // 🔹 Google OAuth handler
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:5008/api/auth/google";
+  };
+
   return (
     <div className="gradient-bg min-h-screen flex items-center justify-center p-4">
       <Card className="w-full max-w-md card-gradient">
@@ -85,7 +90,6 @@ export default function Signup() {
                   placeholder="John"
                   {...register("firstName")}
                   className="bg-input border-border"
-                  data-testid="input-first-name"
                 />
                 {errors.firstName && (
                   <p className="text-sm text-destructive">{errors.firstName.message}</p>
@@ -98,7 +102,6 @@ export default function Signup() {
                   placeholder="Doe"
                   {...register("lastName")}
                   className="bg-input border-border"
-                  data-testid="input-last-name"
                 />
                 {errors.lastName && (
                   <p className="text-sm text-destructive">{errors.lastName.message}</p>
@@ -114,7 +117,6 @@ export default function Signup() {
                 placeholder="john@example.com"
                 {...register("email")}
                 className="bg-input border-border"
-                data-testid="input-email"
               />
               {errors.email && (
                 <p className="text-sm text-destructive">{errors.email.message}</p>
@@ -129,7 +131,6 @@ export default function Signup() {
                 placeholder="Create a strong password"
                 {...register("password")}
                 className="bg-input border-border"
-                data-testid="input-password"
               />
               {errors.password && (
                 <p className="text-sm text-destructive">{errors.password.message}</p>
@@ -144,7 +145,6 @@ export default function Signup() {
                 placeholder="Confirm your password"
                 {...register("confirmPassword")}
                 className="bg-input border-border"
-                data-testid="input-confirm-password"
               />
               {errors.confirmPassword && (
                 <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
@@ -157,17 +157,11 @@ export default function Signup() {
                 id="terms"
                 required
                 className="mt-1 rounded border-border text-primary focus:ring-ring"
-                data-testid="checkbox-terms"
               />
               <Label htmlFor="terms" className="text-sm text-muted-foreground">
                 I agree to the{" "}
-                <Link href="#" className="text-primary hover:underline">
-                  Terms of Service
-                </Link>{" "}
-                and{" "}
-                <Link href="#" className="text-primary hover:underline">
-                  Privacy Policy
-                </Link>
+                <Link href="#" className="text-primary hover:underline">Terms of Service</Link> and{" "}
+                <Link href="#" className="text-primary hover:underline">Privacy Policy</Link>
               </Label>
             </div>
 
@@ -175,16 +169,37 @@ export default function Signup() {
               type="submit"
               className="w-full btn-primary py-2 rounded-lg font-semibold"
               disabled={isLoading}
-              data-testid="button-submit"
             >
               {isLoading ? "Creating Account..." : "Create Account"}
             </Button>
           </form>
 
+          {/* OR Divider */}
+          <div className="flex items-center my-4">
+            <hr className="flex-grow border-t border-border" />
+            <span className="mx-2 text-muted-foreground text-sm">OR</span>
+            <hr className="flex-grow border-t border-border" />
+          </div>
+
+          {/* Google Login Button */}
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full flex items-center justify-center space-x-2"
+            onClick={handleGoogleLogin}
+          >
+            <img
+              src="https://www.svgrepo.com/show/355037/google.svg"
+              alt="Google"
+              className="w-5 h-5"
+            />
+            <span>Continue with Google</span>
+          </Button>
+
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
               Already have an account?{" "}
-              <Link href="/login" className="text-primary hover:underline" data-testid="link-login">
+              <Link href="/login" className="text-primary hover:underline">
                 Sign in
               </Link>
             </p>

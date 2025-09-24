@@ -3,7 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AuthProvider } from "@/components/auth-context";
+import { AuthProvider, useAuth } from "@/components/auth-context";
 import { Navigation } from "@/components/navigation";
 import Home from "@/pages/home";
 import Login from "@/pages/login";
@@ -14,8 +14,22 @@ import ResumeBuilder from "@/pages/resume-builder";
 import Analytics from "@/pages/analytics";
 import IndustryInsights from "@/pages/industry-insights";
 import NotFound from "@/pages/not-found";
+import OAuthSuccess from "@/pages/OAuthSuccess";
 
 function Router() {
+  const { isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-lg text-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -26,6 +40,7 @@ function Router() {
       <Route path="/resume-builder" component={ResumeBuilder} />
       <Route path="/analytics" component={Analytics} />
       <Route path="/industry-insights" component={IndustryInsights} />
+      <Route path="/oauth-success" component={OAuthSuccess} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -36,10 +51,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AuthProvider>
-          <div className="dark min-h-screen">
+          <div className="min-h-screen bg-background text-foreground">
             <Navigation />
+            <main className="pt-16"> {/* Add padding-top to account for fixed navigation */}
+              <Router />
+            </main>
             <Toaster />
-            <Router />
           </div>
         </AuthProvider>
       </TooltipProvider>

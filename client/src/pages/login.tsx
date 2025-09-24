@@ -46,6 +46,11 @@ export default function Login() {
     }
   };
 
+  // 🔹 Google OAuth handler
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:5008/api/auth/google";
+  };
+
   return (
     <div className="gradient-bg min-h-screen flex items-center justify-center p-4">
       <Card className="w-full max-w-md card-gradient">
@@ -61,6 +66,7 @@ export default function Login() {
               </Alert>
             )}
 
+            {/* Email Field */}
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -76,6 +82,7 @@ export default function Login() {
               )}
             </div>
 
+            {/* Password Field */}
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <Input
@@ -116,6 +123,28 @@ export default function Login() {
               {isLoading ? "Signing In..." : "Sign In"}
             </Button>
           </form>
+
+          {/* OR Divider */}
+          <div className="flex items-center my-4">
+            <hr className="flex-grow border-t border-border" />
+            <span className="mx-2 text-muted-foreground text-sm">OR</span>
+            <hr className="flex-grow border-t border-border" />
+          </div>
+
+          {/* Google Login Button */}
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full flex items-center justify-center space-x-2"
+            onClick={handleGoogleLogin}
+          >
+            <img
+              src="https://www.svgrepo.com/show/355037/google.svg"
+              alt="Google"
+              className="w-5 h-5"
+            />
+            <span>Continue with Google</span>
+          </Button>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
