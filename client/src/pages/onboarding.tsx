@@ -5,12 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/components/auth-context";
 import { updateOnboarding } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
-import { Factory, TrendingUp, Briefcase, Megaphone, Heart, Star } from "lucide-react";
+import { Factory, TrendingUp, Megaphone, Heart, Star } from "lucide-react";
 
 export default function Onboarding() {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedIndustry, setSelectedIndustry] = useState("");
-  const [selectedExperience, setSelectedExperience] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { user, token, login } = useAuth();
   const [, setLocation] = useLocation();
@@ -36,18 +35,29 @@ export default function Onboarding() {
 
   const handleExperienceSelect = async (experience: string) => {
     if (!token) return;
-    
-    setSelectedExperience(experience);
     setIsLoading(true);
 
     try {
       const response = await updateOnboarding(selectedIndustry, experience, token);
       login(response.user, token);
+
       toast({
         title: "Setup complete!",
         description: "Your personalized dashboard is ready.",
       });
-      setLocation("/");
+
+      // ✅ Redirect based on industry
+      if (selectedIndustry === "technology") {
+        setLocation("/industry-insights");
+      } else if (selectedIndustry === "finance") {
+        setLocation("/insight-finance");
+      } else if (selectedIndustry === "marketing"){
+        setLocation("/insight-marketing")
+      } else if (selectedIndustry === "healtcare"){
+        setLocation("/insight-healthcare")
+      } else {
+        setLocation("/"); // fallback for healthcare, marketing, etc.
+      }
     } catch (error: any) {
       toast({
         title: "Error",
@@ -80,7 +90,7 @@ export default function Onboarding() {
               <h1 className="text-3xl font-bold text-foreground mb-4">What's your industry?</h1>
               <p className="text-muted-foreground">Help us personalize your career guidance</p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               {industries.map((industry) => (
                 <Card
@@ -97,7 +107,7 @@ export default function Onboarding() {
                 </Card>
               ))}
             </div>
-            
+
             <Button variant="ghost" onClick={handleSkip} data-testid="button-skip">
               Skip for now
             </Button>
@@ -115,7 +125,7 @@ export default function Onboarding() {
               <h1 className="text-3xl font-bold text-foreground mb-4">What's your experience level?</h1>
               <p className="text-muted-foreground">We'll tailor our guidance to your career stage</p>
             </div>
-            
+
             <div className="space-y-4 mb-8">
               {experienceLevels.map((level) => (
                 <Card
@@ -131,7 +141,7 @@ export default function Onboarding() {
                 </Card>
               ))}
             </div>
-            
+
             <div className="flex justify-between">
               <Button variant="ghost" onClick={() => setCurrentStep(1)} data-testid="button-back">
                 Back
